@@ -36,6 +36,7 @@ function Navbar() {
 							Explore
 						</p>
 					</li>
+          
 					<li
 						className='navbarListItem'
 						onClick={() => navigate('/offers')}
@@ -55,6 +56,7 @@ function Navbar() {
 							Offer
 						</p>
 					</li>
+
 					<li
 						className='navbarListItem'
 						onClick={() => navigate('/profile')}

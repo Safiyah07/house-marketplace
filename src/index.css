@@ -9,7 +9,7 @@ html::-webkit-scrollbar {
 
 body {
   font-family: 'Montserrat', sans-serif;
-  background-color: #f2f4f8;
+  background-color: #f3f1ef;
   margin: 0;
   box-sizing: border-box;
 }
@@ -33,7 +33,7 @@ button {
   box-shadow: rgba(0, 0, 0, 0.11);
   border: none;
   background: #ffffff;
-  border-radius: 3rem;
+  border-radius: 1rem;
   height: 3rem;
   width: 100%;
   outline: none;
@@ -59,7 +59,7 @@ button {
 
 .primaryButton {
   cursor: pointer;
-  background: #00cc66;
+  background: #bc6140;
   border-radius: 1rem;
   padding: 0.85rem 2rem;
   color: #ffffff;
@@ -100,7 +100,8 @@ button {
   .listingDetails,
   .category,
   .explore {
-    margin: 3rem;
+    margin: 3rem auto;
+    width: 70%;
   }
 }
 
@@ -121,7 +122,7 @@ button {
   width: 64px;
   height: 64px;
   border: 8px solid;
-  border-color: #00cc66 transparent #00cc66 transparent;
+  border-color: #b88d6c transparent #b88d6c transparent;
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
 }
@@ -213,14 +214,14 @@ button {
 
 .forgotPasswordLink {
   cursor: pointer;
-  color: #00cc66;
+  color: #8c6140;
   font-weight: 600;
   text-align: right;
 }
 
 .signInBar,
 .signUpBar {
-  margin-top: 3rem;
+  margin-top: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -233,12 +234,12 @@ button {
 .signUpText {
   cursor: pointer;
 }
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
   .signInBar,
   .signUpBar {
     justify-content: start;
   }
-}
+} */
 
 .signInText,
 .signUpText {
@@ -253,7 +254,7 @@ button {
   align-items: center;
   width: 3rem;
   height: 3rem;
-  background-color: #00cc66;
+  background-color: #8c6140;
   border-radius: 50%;
 }
 @media (min-width: 1024px) {
@@ -289,8 +290,8 @@ button {
 }
 
 .registerLink {
-  margin-top: 4rem;
-  color: #00cc66;
+  margin-top: 2rem;
+  color: #8c6140;
   font-weight: 600;
   text-align: center;
   margin-bottom: 3rem;
