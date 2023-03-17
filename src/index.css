@@ -452,7 +452,7 @@ button {
   margin-top: 0.5rem;
   font-weight: 600;
   font-size: 1.1rem;
-  color: #00cc66;
+  color: #8c6140;
   margin-bottom: 0;
   display: flex;
   align-items: center;
@@ -525,7 +525,7 @@ button {
 
 .listingType {
   padding: 0.25rem 0.5rem;
-  background-color: #00cc66;
+  background-color: #8c6140;
   color: #ffffff;
   border-radius: 2rem;
   display: inline;
@@ -626,7 +626,7 @@ button {
   font-size: 1rem;
   font-weight: 600;
   color: #ffffff;
-  background-color: #00cc66;
+  background-color: #8c6140;
   padding: 0.25rem 0.75rem;
   border-radius: 1rem;
 }
@@ -634,7 +634,7 @@ button {
 .profileDetailsHeader {
   display: flex;
   justify-content: space-between;
-  max-width: 500px;
+  /* max-width: 500px; */
 }
 
 .personalDetailsText {
@@ -644,7 +644,7 @@ button {
 .changePersonalDetails {
   cursor: pointer;
   font-weight: 600;
-  color: #00cc66;
+  color: #8c6140;
 }
 
 .profileCard {
@@ -739,7 +739,7 @@ button {
   align-items: center;
 }
 .formButtonActive {
-  background-color: #00cc66;
+  background-color: #8c6140;
   color: #ffffff;
 }
 
@@ -794,7 +794,7 @@ button {
   width: 100%;
 }
 .formInputFile::-webkit-file-upload-button {
-  background-color: #00cc66;
+  background-color: #8c6140;
   border: none;
   color: #ffffff;
   font-weight: 600;
