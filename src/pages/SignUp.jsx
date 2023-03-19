@@ -6,7 +6,7 @@ import {
 	createUserWithEmailAndPassword,
 	updateProfile,
 } from 'firebase/auth'
-import { setDoc, doc, serverTimestamp} from 'firebase/firestore'
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import OAuth from '../components/OAuth'
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg'
@@ -48,12 +48,12 @@ function SignUp() {
 				displayName: name,
 			})
 
-      const formDataCopy = {...formData}
-      delete formDataCopy.password
+			const formDataCopy = { ...formData }
+			delete formDataCopy.password
 
-      formDataCopy.timestamp = serverTimestamp()
+			formDataCopy.timestamp = serverTimestamp()
 
-      await setDoc(doc(db, 'users', user.uid), formDataCopy)
+			await setDoc(doc(db, 'users', user.uid), formDataCopy)
 
 			navigate('/')
 		} catch (error) {
