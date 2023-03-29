@@ -59,7 +59,7 @@ button {
 
 .primaryButton {
   cursor: pointer;
-  background: #bc6140;
+  background: #8c6140;
   border-radius: 1rem;
   padding: 0.85rem 2rem;
   color: #ffffff;
@@ -421,8 +421,9 @@ button {
 }
 @media (min-width: 1024px) {
   .categoryListingImg {
-    width: 19%;
+    width: 60%;
     height: 217px;
+    margin-right: 24px;
   }
 }
 
