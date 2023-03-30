@@ -419,7 +419,12 @@ button {
   border-radius: 1.5rem;
   object-fit: cover;
 }
+
 @media (min-width: 1024px) {
+  .categoryListing {
+    margin-bottom: 2rem;
+  }
+
   .categoryListingImg {
     width: 60%;
     height: 217px;

@@ -85,6 +85,7 @@ function CreateListing() {
 			return
 		}
 
+		// Geocoding / location / address
 		let geolocation = {}
 		let location
 
@@ -108,13 +109,13 @@ function CreateListing() {
 				setLoading(false)
 				toast.error('Please enter a correct address')
 				return
+			} else {
+				geolocation.lat = latitude
+				geolocation.lng = longitude
 			}
-		} else {
-			geolocation.lat = latitude
-			geolocation.lng = longitude
 		}
 
-		//  Store Images In Firebase
+		// Store Images In Firebase
 		const storeImage = async (image) => {
 			return new Promise((resolve, reject) => {
 				const storage = getStorage()
@@ -136,8 +137,8 @@ function CreateListing() {
 							case 'running':
 								console.log('Upload is running')
 								break
-              default:
-                return
+							default:
+								return
 						}
 					},
 					(error) => {
@@ -158,29 +159,29 @@ function CreateListing() {
 		const imageUrls = await Promise.all(
 			[...images].map((image) => storeImage(image))
 		).catch(() => {
-      setLoading(false)
-      toast.error('Images Not Uploaded')
-      return
-    })
+			setLoading(false)
+			toast.error('Images Not Uploaded')
+			return
+		})
 
-    const formDataCopy = {
-      ...formData,
-      imageUrls,
-      geolocation,
-      timestamp: serverTimestamp()
-    }
+		const formDataCopy = {
+			...formData,
+			imageUrls,
+			geolocation,
+			timestamp: serverTimestamp(),
+		}
 
-    formDataCopy.location = address
-    delete formDataCopy.images
-    delete formDataCopy.address
-    !formDataCopy.offer && delete formDataCopy.discountedPrice
+		formDataCopy.location = address
+		delete formDataCopy.images
+		delete formDataCopy.address
+		!formDataCopy.offer && delete formDataCopy.discountedPrice
 
-    const docRef = await addDoc(collection(db, 'listings'), formDataCopy)
-    setLoading(false)
-    toast.success('Listing Saved')
-    navigate(`/category/${formDataCopy.type}/${docRef.id}`)
+		const docRef = await addDoc(collection(db, 'listings'), formDataCopy)
+		setLoading(false)
+		toast.success('Listing Saved')
+		navigate(`/category/${formDataCopy.type}/${docRef.id}`)
 
-    console.log(imageUrls);
+		console.log(imageUrls)
 		setLoading(false)
 	}
 
@@ -408,7 +409,7 @@ function CreateListing() {
 							id='regularPrice'
 							value={regularPrice}
 							onChange={onMutate}
-							min='50'
+							min='100'
 							max='750000000'
 							required
 						/>
@@ -424,7 +425,7 @@ function CreateListing() {
 								id='discountedPrice'
 								value={discountedPrice}
 								onChange={onMutate}
-								min='50'
+								min='100'
 								max='750000000'
 								required={offer}
 							/>
