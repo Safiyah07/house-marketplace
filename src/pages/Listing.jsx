@@ -3,18 +3,12 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import { register } from 'swiper/element/bundle'
+import "swiper/css/bundle";
 import { getDoc, doc } from 'firebase/firestore'
 import { getAuth } from 'firebase/auth'
 import { db } from '../firebase.config'
 import Spinner from './../components/Spinner'
 import shareIcon from '../assets/svg/shareIcon.svg'
-
-register()
 
 function Listing() {
 	const [listing, setListing] = useState(null)
@@ -31,7 +25,6 @@ function Listing() {
 			const docSnap = await getDoc(docRef)
 
 			if (docSnap.exists()) {
-				console.log(docSnap.data())
 				setListing(docSnap.data())
 				setLoading(false)
 			}
@@ -47,19 +40,17 @@ function Listing() {
 	return (
 		<main>
 			{/* Slider */}
-			{(listing.imageUrls || listing.imageUrls > 0) && (
         <Swiper
         breakpoints={{
-          200: {
+          0: {
             'slidesPerView': '1',
           },
-          900: {
+          1024: {
             'slidesPerView': '2',
           },
         }}
         // install Swiper modules
         modules={[Navigation, Pagination, Scrollbar, A11y]}
-        slidesPerView={2}
         navigation
         pagination={{ clickable: true }}
       >
@@ -75,7 +66,6 @@ function Listing() {
 						</SwiperSlide>
 					))}
         </Swiper>
-			)}
 
 			<div
 				className='shareIconDiv'

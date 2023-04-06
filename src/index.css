@@ -356,8 +356,8 @@ button {
 .swiperSlideText {
   color: #ffffff;
   position: absolute;
-  top: 70px;
-  left: 0;
+  /* top: 70px; */
+  left: 11px;
   font-weight: 600;
   max-width: 90%;
   font-size: 1.25rem;
@@ -370,16 +370,17 @@ button {
   }
 }
 
-.swiperSlidePrice {
-  color: #000000;
+.swiperSlideTextAndPrice {
+  color: #ffffff;
   position: absolute;
-  top: 143px;
-  left: 11px;
+  left: 0px;
+  bottom: 0;
   font-weight: 600;
+  font-size: 1.2rem;
   max-width: 90%;
-  background-color: #ffffff;
-  padding: 0.25rem 0.5rem;
-  border-radius: 1rem;
+  background-color: #000000b7;
+  padding: 1rem;
+  border-radius: .5rem;
 }
 @media (min-width: 1024px) {
   .swiperSlidePrice {
@@ -393,6 +394,11 @@ button {
 }
 .exploreCategories a {
   width: 48%;
+}
+@media (max-width: 1200px) {
+  .exploreCategories a {
+    margin-bottom: 5rem;
+  }
 }
 
 .exploreCategoryImg {

@@ -20,7 +20,7 @@ function Contact() {
 			if (docSnap.exists()) {
 				setLandlord(docSnap.data())
 			} else {
-				// toast.error('Could Not Get Landlord Data')
+				toast.error('Could Not Get Landlord Data')
 			}
 		}
 
