@@ -75,14 +75,14 @@ button {
 .removeIcon {
   cursor: pointer;
   position: absolute;
-  top: -3%;
-  right: -2%;
+  top: 20%;
+  right: 0;
 }
 .editIcon {
   cursor: pointer;
   position: absolute;
-  top: -3.4%;
-  right: 20px;
+  top: 20%;
+  right: 40px;
 }
 
 .pageContainer,
@@ -499,10 +499,10 @@ button {
 
 .loadMore {
   cursor: pointer;
-  width: 8rem;
+  width: 100%;
   margin: 0 auto;
   text-align: center;
-  padding: 0.25rem 0.5rem;
+  padding: 1rem;
   background-color: #000000;
   color: #ffffff;
   font-weight: 600;
@@ -651,11 +651,11 @@ button {
 .logOut {
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
-  font-size: 1rem;
+  /* font-size: .8rem; */
   font-weight: 600;
   color: #ffffff;
   background-color: #8c6140;
-  padding: 0.25rem 0.75rem;
+  padding: .7rem;
   border-radius: 1rem;
 }
 

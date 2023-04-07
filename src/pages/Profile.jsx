@@ -9,6 +9,8 @@ import {
 	where,
 	orderBy,
 	deleteDoc,
+	startAfter,
+	limit,
 } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { useNavigate, Link } from 'react-router-dom'
@@ -21,6 +23,7 @@ function Profile() {
 	const auth = getAuth()
 	const [loading, setLoading] = useState(true)
 	const [listings, setListings] = useState(null)
+	const [lastFetchedListing, setLastFetchedListing] = useState(null)
 	const [changeDetails, setChangeDetails] = useState(false)
 	const [formData, setFormData] = useState({
 		name: auth.currentUser.displayName,
@@ -38,10 +41,14 @@ function Profile() {
 			const q = query(
 				listingsRef,
 				where('userRef', '==', auth.currentUser.uid),
-				orderBy('timestamp', 'desc')
+				orderBy('timestamp', 'desc'),
+				limit(5)
 			)
 
 			const querySnap = await getDocs(q)
+
+			const lastVisible = querySnap.docs[querySnap.docs.length - 1]
+			setLastFetchedListing(lastVisible)
 
 			let listings = []
 
@@ -84,25 +91,63 @@ function Profile() {
 		}
 	}
 
-	const onChange = (e) => {
-		setFormData((prevState) => ({
-			...prevState,
-			[e.target.id]: e.target.value,
-		}))
-	}
+	// Pagination / Load More
+	const onFetchMoreListings = async () => {
+		try {
+			// Get a reference
+			const listingsRef = collection(db, 'listings')
 
-	const onDelete = async (listingId) => {
-		if (window.confirm('Are you sure you want to delete?')) {
-			await deleteDoc(doc(db, 'listings', listingId))
-
-			const updatedListings = listings.filter(
-				(listing) => listing.id !== listing
-			)
-			setListings(updatedListings)
-			toast.success('Successfully deleted listing')
+			// Create a query
+			const q = query(
+				listingsRef,
+				where('userRef', '==', auth.currentUser.uid),
+				orderBy('timestamp', 'desc'),
+				startAfter(lastFetchedListing),
+				limit(5)
+				)
+				
+				// Execute query
+				const querySnap = await getDocs(q)
+				
+				const lastVisible = querySnap.docs[querySnap.docs.length - 1]
+				setLastFetchedListing(lastVisible)
+				
+				const listings = []
+				
+				querySnap.forEach((doc) => {
+					return listings.push({
+						id: doc.id,
+						data: doc.data(),
+					})
+				})
+				
+				setListings((prevState) => [...prevState, ...listings])
+				setLoading(false)
+			} catch (error) {
+				toast.error('Could Not Fetch Listings')
+			}
 		}
-	}
 
+		const onChange = (e) => {
+			setFormData((prevState) => ({
+				...prevState,
+				[e.target.id]: e.target.value,
+			}))
+		}
+		
+		const onDelete = async (listingId) => {
+			if (window.confirm('Are you sure you want to delete?')) {
+				await deleteDoc(doc(db, 'listings', listingId))
+	
+				const updatedListings = listings.filter(
+					(listing) => listing.id !== listing
+				)
+				setListings(updatedListings)
+				toast.success('Successfully deleted listing')
+			}
+		}
+
+		const onEdit = (listingId) => {navigate(`/edit-listing/${listingId}`)}
 	return (
 		<div className='profile'>
 			<header className='profileHeader'>
@@ -176,11 +221,23 @@ function Profile() {
 								listing={listing.data}
 								id={listing.id}
 								onDelete={() => onDelete(listing.id)}
+								onEdit={() => onEdit(listing.id)}
 							/>
 						))}
 					</>
 				)}
 			</main>
+
+			<br />
+			{lastFetchedListing && (
+				<p
+				style={{backgroundColor: '#8c6140'}}
+					className='loadMore'
+					onClick={onFetchMoreListings}
+				>
+					Load More
+				</p>
+			)}
 		</div>
 	)
 }
