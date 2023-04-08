@@ -17,7 +17,7 @@ function EditListing() {
 	// eslint-disable-next-line no-unused-vars
 	const [geolocationEnabled, setGeolocationEnabled] = useState(true)
 	const [loading, setLoading] = useState(false)
-  const [listing, setListing] = useState(false)
+	const [listing, setListing] = useState(false)
 	const [formData, setFormData] = useState({
 		type: 'rent',
 		name: '',
@@ -52,38 +52,38 @@ function EditListing() {
 
 	const auth = getAuth()
 	const navigate = useNavigate()
-  const params = useParams()
+	const params = useParams()
 	const isMounted = useRef(true)
 
-  // Redirect if listing is not users
-  useEffect(() => {
-    if(listing && listing.userRef !== auth.currentUser.uid) {
-      toast.error('You cannot edit that listing')
-      navigate('/')
-    }
-  })
+	// Redirect if listing is not users
+	useEffect(() => {
+		if (listing && listing.userRef !== auth.currentUser.uid) {
+			toast.error('You cannot edit that listing')
+			navigate('/')
+		}
+	})
 
-  // Fetch listing to edit
-  useEffect(() => {
-    // setLoading(true)
-    const fetchListing = async () => {
-      const docRef = doc(db, 'listings', params.listingId)
-      const docSnap = await getDoc(docRef)
+	// Fetch listing to edit
+	useEffect(() => {
+		setLoading(true)
+		const fetchListing = async () => {
+			const docRef = doc(db, 'listings', params.listingId)
+			const docSnap = await getDoc(docRef)
 
-      if(docSnap.exists()) {
-        setListing(docSnap.data())
-        setFormData({...docSnap.data(), address: docSnap.data().location})
-        setLoading(false)
-      } else {
-        navigate('/')
-        toast.error('Listing does not exist')
-      }
-    }
+			if (docSnap.exists()) {
+				setListing(docSnap.data())
+				setFormData({ ...docSnap.data(), address: docSnap.data().location })
+				setLoading(false)
+			} else {
+				navigate('/')
+				toast.error('Listing does not exist')
+			}
+		}
 
-    fetchListing()
-  }, [navigate, params.listingId])
+		fetchListing()
+	}, [navigate, params.listingId])
 
-  // Sets User Ref to logged in User
+	// Sets User Ref to logged in User
 	useEffect(() => {
 		if (isMounted) {
 			onAuthStateChanged(auth, (user) => {
@@ -208,9 +208,9 @@ function EditListing() {
 		delete formDataCopy.address
 		!formDataCopy.offer && delete formDataCopy.discountedPrice
 
-    // Update Listing
+		// Update Listing
 		const docRef = doc(db, 'listings', params.listingId)
-    await updateDoc(docRef, formDataCopy)
+		await updateDoc(docRef, formDataCopy)
 		setLoading(false)
 		toast.success('Listing Saved')
 		navigate(`/category/${formDataCopy.type}/${docRef.id}`)

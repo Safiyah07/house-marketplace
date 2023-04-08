@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css/bundle";
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css/bundle'
 import { getDoc, doc } from 'firebase/firestore'
 import { getAuth } from 'firebase/auth'
 import { db } from '../firebase.config'
@@ -39,32 +39,35 @@ function Listing() {
 	return (
 		<main>
 			{/* Slider */}
-        <Swiper
-        breakpoints={{
-          0: {
-            'slidesPerView': '1',
-          },
-          1024: {
-            'slidesPerView': '2',
-          },
-        }}
-        // install Swiper modules
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
-        navigation
-        pagination={{ clickable: true }}
-      >
-					{listing.imageUrls.map((url, index) => (
-						<SwiperSlide key={index} style={{width: '100%'}}>
-							<div
-								style={{
-									background: `url(${listing.imageUrls[index]}) center no-repeat`,
-									backgroundSize: 'cover',
-								}}
-								className='swiperSlideDiv'
-							></div>
-						</SwiperSlide>
-					))}
-        </Swiper>
+			<Swiper
+				breakpoints={{
+					0: {
+						slidesPerView: '1',
+					},
+					1024: {
+						slidesPerView: '2',
+					},
+				}}
+				// install Swiper modules
+				modules={[Navigation, Pagination, Scrollbar, A11y]}
+				navigation
+				pagination={{ clickable: true }}
+			>
+				{listing.imageUrls.map((url, index) => (
+					<SwiperSlide
+						key={index}
+						style={{ width: '100%' }}
+					>
+						<div
+							style={{
+								background: `url(${listing.imageUrls[index]}) center no-repeat`,
+								backgroundSize: 'cover',
+							}}
+							className='swiperSlideDiv'
+						></div>
+					</SwiperSlide>
+				))}
+			</Swiper>
 
 			<div
 				className='shareIconDiv'
@@ -123,27 +126,31 @@ function Listing() {
 					<li>{listing.furnished && 'Furnished'}</li>
 				</ul>
 
-				<p className='listingLocationTitle'>Location</p>
-				{/* Map */}
-				<div className='leafletContainer'>
-					<MapContainer
-						style={{ height: '100%', width: '100%' }}
-						center={[listing.geolocation.lat, listing.geolocation.lng]}
-						zoom={13}
-						scrollWheelZoom={false}
-					>
-						<TileLayer
-							attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-							url='https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png'
-						/>
+				{listing.geolocation.lat !== 0 && listing.geolocation.lng !== 0 && (
+					<>
+						<p className='listingLocationTitle'>Location</p>
+						{/* Map */}
+						<div className='leafletContainer'>
+							<MapContainer
+								style={{ height: '100%', width: '100%' }}
+								center={[listing.geolocation.lat, listing.geolocation.lng]}
+								zoom={13}
+								scrollWheelZoom={false}
+							>
+								<TileLayer
+									attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+									url='https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png'
+								/>
 
-						<Marker
-							position={[listing.geolocation.lat, listing.geolocation.lng]}
-						>
-							<Popup>{listing.location}</Popup>
-						</Marker>
-					</MapContainer>
-				</div>
+								<Marker
+									position={[listing.geolocation.lat, listing.geolocation.lng]}
+								>
+									<Popup>{listing.location}</Popup>
+								</Marker>
+							</MapContainer>
+						</div>
+					</>
+				)}
 
 				{auth.currentUser?.uid !== listing.userRef && (
 					<Link

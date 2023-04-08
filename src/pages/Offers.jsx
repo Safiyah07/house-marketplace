@@ -97,9 +97,7 @@ function Offers() {
 	return (
 		<div className='category'>
 			<header>
-				<p className='pageHeader'>
-					Offers
-				</p>
+				<p className='pageHeader'>Offers</p>
 			</header>
 
 			{loading ? (
@@ -119,8 +117,13 @@ function Offers() {
 					</main>
 
 					<br />
-					{lastFetchedListing (
-						<p className="loadMore" onClick={onFetchMoreListings}>Load More</p>
+					{lastFetchedListing && (
+						<p
+							className='loadMore'
+							onClick={onFetchMoreListings}
+						>
+							Load More
+						</p>
 					)}
 				</>
 			) : (

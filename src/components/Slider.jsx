@@ -28,7 +28,6 @@ function Slider() {
 				})
 			})
 
-			console.log(listings)
 			setListings(listings)
 			setLoading(false)
 		}
@@ -40,7 +39,7 @@ function Slider() {
 		return <Spinner />
 	}
 
-	if(listings.length === 0) {
+	if (listings.length === 0) {
 		return <></>
 	}
 
@@ -76,8 +75,7 @@ function Slider() {
 								</p> */}
 								<p className='swiperSlideTextAndPrice'>
 									{data.name}
-									<br />
-                  ${data.discountedPrice ?? data.regularPrice}
+									<br />${data.discountedPrice ?? data.regularPrice}
 									{data.type === 'rent' && ' / month '}
 								</p>
 							</div>

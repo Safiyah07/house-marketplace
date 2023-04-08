@@ -59,7 +59,6 @@ function Profile() {
 				})
 			})
 
-			console.log(listings)
 			setListings(listings)
 			setLoading(false)
 		}
@@ -104,50 +103,53 @@ function Profile() {
 				orderBy('timestamp', 'desc'),
 				startAfter(lastFetchedListing),
 				limit(5)
-				)
-				
-				// Execute query
-				const querySnap = await getDocs(q)
-				
-				const lastVisible = querySnap.docs[querySnap.docs.length - 1]
-				setLastFetchedListing(lastVisible)
-				
-				const listings = []
-				
-				querySnap.forEach((doc) => {
-					return listings.push({
-						id: doc.id,
-						data: doc.data(),
-					})
+			)
+
+			// Execute query
+			const querySnap = await getDocs(q)
+
+			const lastVisible = querySnap.docs[querySnap.docs.length - 1]
+			setLastFetchedListing(lastVisible)
+
+			const listings = []
+
+			querySnap.forEach((doc) => {
+				return listings.push({
+					id: doc.id,
+					data: doc.data(),
 				})
-				
-				setListings((prevState) => [...prevState, ...listings])
-				setLoading(false)
-			} catch (error) {
-				toast.error('Could Not Fetch Listings')
-			}
-		}
+			})
 
-		const onChange = (e) => {
-			setFormData((prevState) => ({
-				...prevState,
-				[e.target.id]: e.target.value,
-			}))
+			setListings((prevState) => [...prevState, ...listings])
+			setLoading(false)
+		} catch (error) {
+			toast.error('Could Not Fetch Listings')
 		}
-		
-		const onDelete = async (listingId) => {
-			if (window.confirm('Are you sure you want to delete?')) {
-				await deleteDoc(doc(db, 'listings', listingId))
-	
-				const updatedListings = listings.filter(
-					(listing) => listing.id !== listing
-				)
-				setListings(updatedListings)
-				toast.success('Successfully deleted listing')
-			}
-		}
+	}
 
-		const onEdit = (listingId) => {navigate(`/edit-listing/${listingId}`)}
+	const onChange = (e) => {
+		setFormData((prevState) => ({
+			...prevState,
+			[e.target.id]: e.target.value,
+		}))
+	}
+
+	const onDelete = async (listingId) => {
+		if (window.confirm('Are you sure you want to delete?')) {
+			await deleteDoc(doc(db, 'listings', listingId))
+
+			const updatedListings = listings.filter(
+				(listing) => listing.id !== listing
+			)
+			setListings(updatedListings)
+			toast.success('Successfully deleted listing')
+		}
+	}
+
+	const onEdit = (listingId) => {
+		navigate(`/edit-listing/${listingId}`)
+	}
+
 	return (
 		<div className='profile'>
 			<header className='profileHeader'>
@@ -231,7 +233,7 @@ function Profile() {
 			<br />
 			{lastFetchedListing && (
 				<p
-				style={{backgroundColor: '#8c6140'}}
+					style={{ backgroundColor: '#8c6140' }}
 					className='loadMore'
 					onClick={onFetchMoreListings}
 				>
