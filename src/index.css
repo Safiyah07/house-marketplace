@@ -374,7 +374,7 @@ button {
 	color: #ffffff;
 	position: absolute;
 	left: 0px;
-	bottom: 0;
+	bottom: 15px;
 	font-weight: 600;
 	font-size: 1.2rem;
 	max-width: 90%;
