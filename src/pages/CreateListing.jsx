@@ -80,6 +80,12 @@ function CreateListing() {
 			return
 		}
 
+		if (images.length < 2) {
+			setLoading(false)
+			toast.error('Minimum of 2 Images')
+			return
+		}
+
 		if (images.length > 6) {
 			setLoading(false)
 			toast.error('Max 6 Images')
@@ -110,10 +116,10 @@ function CreateListing() {
 				setLoading(false)
 				toast.error('Please enter a correct address')
 				return
-			} else {
-				geolocation.lat = latitude
-				geolocation.lng = longitude
 			}
+		} else {
+			geolocation.lat = latitude
+			geolocation.lng = longitude
 		}
 
 		// Store Images In Firebase
@@ -182,7 +188,6 @@ function CreateListing() {
 		toast.success('Listing Saved')
 		navigate(`/category/${formDataCopy.type}/${docRef.id}`)
 
-		console.log(imageUrls)
 		setLoading(false)
 	}
 
@@ -442,6 +447,7 @@ function CreateListing() {
 						type='file'
 						id='images'
 						onChange={onMutate}
+						min='2'
 						max='6'
 						accept='.jpg,.png,.jpeg'
 						multiple

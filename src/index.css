@@ -82,7 +82,7 @@ button {
 	cursor: pointer;
 	position: absolute;
 	top: 20%;
-	right: 40px;
+	right: 28px;
 }
 
 .pageContainer,
@@ -373,7 +373,7 @@ button {
 .swiperSlideTextAndPrice {
 	color: #ffffff;
 	position: absolute;
-	left: 0px;
+	left: 20px;
 	bottom: 0;
 	font-weight: 600;
 	font-size: 1.2rem;
