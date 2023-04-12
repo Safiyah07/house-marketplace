@@ -253,7 +253,7 @@ function CreateListing() {
 						</button>
 					</div>
 
-					<label className='formLabel'>Name</label>
+					<label className='formLabel'>Name of House</label>
 					<input
 						className='formInputName'
 						type='text'
