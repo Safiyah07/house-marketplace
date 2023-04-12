@@ -373,7 +373,7 @@ button {
 .swiperSlideTextAndPrice {
 	color: #ffffff;
 	position: absolute;
-	left: 20px;
+	left: 0px;
 	bottom: 0;
 	font-weight: 600;
 	font-size: 1.2rem;
