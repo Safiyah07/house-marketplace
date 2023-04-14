@@ -14,6 +14,7 @@ import CreateListing from './pages/CreateListing'
 import EditListing from './pages/EditListing'
 import Listing from './pages/Listing'
 import Contact from './pages/Contact'
+import Notfound from './pages/Notfound'
 
 function App() {
 	return (
@@ -68,6 +69,14 @@ function App() {
 					<Route
 						path='/contact/:landlordId'
 						element={<Contact />}
+					/>
+					<Route
+						path='/Notfound'
+						element={<Notfound />}
+					/>
+					<Route
+						path='/*'
+						element={<Notfound />}
 					/>
 				</Routes>
 
